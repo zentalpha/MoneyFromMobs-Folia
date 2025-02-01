@@ -110,7 +110,7 @@ public class MessageManager {
 
 		if (moveFloatingTextMessageUpwards) {
 			for (int i = 0; i < floatingTextDuration; i += 1) {
-				FoliaUtil.scheduler.runTaskLater(armorstand, () -> armorstand.teleport(armorstand.getLocation().add(0, 0.1,0)), i);
+				FoliaUtil.scheduler.runTaskLater(armorstand, () -> FoliaUtil.teleportAsync(armorstand, armorstand.getLocation().add(0, 0.1,0)), i);
 			}
 		}
 
