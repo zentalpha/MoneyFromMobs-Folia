@@ -55,3 +55,4 @@ permissions:
     description: Allows player to use /MfmClear
   MoneyFromMobs.event:
     description: Allows player to use /MfmEvent <Start/Stop> [Percentage Increase] [Hours] [Minutes] [Seconds]
+folia-supported: true
