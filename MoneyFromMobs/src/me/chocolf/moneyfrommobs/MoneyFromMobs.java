@@ -16,7 +16,6 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import me.chocolf.moneyfrommobs.integrations.MoneyFromMobsPlaceholderExpansion;
 import me.chocolf.moneyfrommobs.integrations.MythicMobsFileManager;
@@ -27,6 +26,7 @@ import me.chocolf.moneyfrommobs.utils.UpdateChecker;
 import me.chocolf.moneyfrommobs.utils.VersionUtils;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.tjdev.util.tjpluginutil.spigot.scheduler.universalscheduler.scheduling.tasks.MyScheduledTask;
 
 public class MoneyFromMobs extends JavaPlugin{
 	private Economy econ = null;
@@ -38,8 +38,8 @@ public class MoneyFromMobs extends JavaPlugin{
 	private DropsManager dropsManager;
 	private MobManager mobManager;
 	private MultipliersManager multipliersManager;
-	private BukkitTask inventoryIsFullRunnable;
-	private BukkitTask repeatingMultiplierEvent;
+	private MyScheduledTask inventoryIsFullRunnable;
+	private MyScheduledTask repeatingMultiplierEvent;
 	private PlaceholderAPIListener placeholderListener;
 	private static MoneyFromMobs instance;
 	
@@ -235,11 +235,11 @@ public class MoneyFromMobs extends JavaPlugin{
 	public PlaceholderAPIListener getPlaceholdersListener() {
 		return placeholderListener;
 	}
-	public BukkitTask getInventoryIsFullRunnable() {
+	public MyScheduledTask getInventoryIsFullRunnable() {
 		return inventoryIsFullRunnable;
 	}
-	public BukkitTask getRepeatingMultiplierEvent(){return repeatingMultiplierEvent;}
-	public void setRepeatingMultiplierEvent(BukkitTask newRepeatingMultiplierEvent){ repeatingMultiplierEvent = newRepeatingMultiplierEvent;}
+	public MyScheduledTask getRepeatingMultiplierEvent(){return repeatingMultiplierEvent;}
+	public void setRepeatingMultiplierEvent(MyScheduledTask newRepeatingMultiplierEvent){ repeatingMultiplierEvent = newRepeatingMultiplierEvent;}
 	public static MoneyFromMobs getInstance() {
 		return instance;
 	}

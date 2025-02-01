@@ -5,11 +5,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import me.chocolf.moneyfrommobs.MoneyFromMobs;
 import me.chocolf.moneyfrommobs.managers.MessageManager;
 import me.chocolf.moneyfrommobs.managers.MultipliersManager;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
+import org.tjdev.util.tjpluginutil.spigot.scheduler.universalscheduler.scheduling.tasks.MyScheduledTask;
 
 public class MfmEventCommand implements CommandExecutor{
 	
@@ -27,7 +28,7 @@ public class MfmEventCommand implements CommandExecutor{
 		int numberOfArgs = args.length;
 		MessageManager messageManager = plugin.getMessageManager();
 		MultipliersManager multipliersManager = plugin.getMultipliersManager();
-		BukkitTask task = multipliersManager.getCurrentMultiplierEvent();
+		MyScheduledTask task = multipliersManager.getCurrentMultiplierEvent();
 		
 		if (numberOfArgs > 0) {
 			if (args[0].equalsIgnoreCase("stop")) {
@@ -43,7 +44,7 @@ public class MfmEventCommand implements CommandExecutor{
 								p.sendMessage(messageToSendOnEnd);
 						}
 					}
-					Bukkit.getScheduler().cancelTask(task.getTaskId());
+					task.cancel();
 					multipliersManager.setCurrentMultiplierEvent(null, 0);
 				}
 				else {
@@ -98,7 +99,7 @@ public class MfmEventCommand implements CommandExecutor{
 
 					}
 
-					BukkitTask currentTask = Bukkit.getScheduler().runTaskLater(plugin, () -> {
+					MyScheduledTask currentTask = FoliaUtil.scheduler.runTaskLater(() -> {
 						multipliersManager.setEventMultiplier(0);
 						multipliersManager.setCurrentMultiplierEvent(null, 0);
 						String messageToSendOnEnd = messageManager.getMessage("eventFinish");

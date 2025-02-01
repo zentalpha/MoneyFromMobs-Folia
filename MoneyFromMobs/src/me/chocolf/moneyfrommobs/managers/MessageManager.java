@@ -17,6 +17,7 @@ import me.chocolf.moneyfrommobs.utils.VersionUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
 
 public class MessageManager {
 	
@@ -109,11 +110,11 @@ public class MessageManager {
 
 		if (moveFloatingTextMessageUpwards) {
 			for (int i = 0; i < floatingTextDuration; i += 1) {
-				Bukkit.getScheduler().runTaskLater(plugin, () -> armorstand.teleport(armorstand.getLocation().add(0, 0.1,0)), i);
+				FoliaUtil.scheduler.runTaskLater(armorstand, () -> armorstand.teleport(armorstand.getLocation().add(0, 0.1,0)), i);
 			}
 		}
 
-		Bukkit.getScheduler().runTaskLater(plugin, armorstand::remove, (long) floatingTextDuration);
+		FoliaUtil.scheduler.runTaskLater(armorstand, armorstand::remove, (long) floatingTextDuration);
 	}
 	
 	

@@ -17,7 +17,7 @@ import io.hotmail.com.jacob_vejvoda.infernal_mobs.infernal_mobs;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import me.chocolf.moneyfrommobs.MoneyFromMobs;
 import me.chocolf.moneyfrommobs.utils.RandomNumberUtils;
-import org.bukkit.scheduler.BukkitTask;
+import org.tjdev.util.tjpluginutil.spigot.scheduler.universalscheduler.scheduling.tasks.MyScheduledTask;
 
 public class MultipliersManager {
 	
@@ -31,7 +31,7 @@ public class MultipliersManager {
 	private double levelledMobsMultiplier = 0;
 	private double infernalMobsMultiplier = 0;
 	private double guildsMultiplier = 0;
-	private BukkitTask currentMultiplierEvent;
+	private MyScheduledTask currentMultiplierEvent;
 	private long currentEventEndTime;
 	
 	private final HashMap<String, Double> worldMultipliers = new HashMap<>();
@@ -295,10 +295,10 @@ public class MultipliersManager {
 		return eventMultiplier;
 	}
 
-	public BukkitTask getCurrentMultiplierEvent(){
+	public MyScheduledTask getCurrentMultiplierEvent(){
 		return currentMultiplierEvent;
 	}
-	public void setCurrentMultiplierEvent(BukkitTask task, long eventDuration){
+	public void setCurrentMultiplierEvent(MyScheduledTask task, long eventDuration){
 		currentMultiplierEvent = task;
 		if (eventDuration != 0) {
 			currentEventEndTime = System.currentTimeMillis() + (eventDuration * 1000);
@@ -322,14 +322,14 @@ public class MultipliersManager {
 
 		if (newDelay != repeatingDelay || (plugin.getRepeatingMultiplierEvent() == null && config.getBoolean("RepeatingMultiplierEvent.Enabled")) ){
 			if (plugin.getRepeatingMultiplierEvent() != null) {
-				Bukkit.getScheduler().cancelTask(plugin.getRepeatingMultiplierEvent().getTaskId());
+				plugin.getRepeatingMultiplierEvent().cancel();
 			}
 			reloadRepeatingMultiplierEventValues(config);
 			plugin.loadRepeatingMultiplierEvent();
 		}
 		else if (!config.getBoolean("RepeatingMultiplierEvent.Enabled")){
 			if (plugin.getRepeatingMultiplierEvent() != null) {
-				Bukkit.getScheduler().cancelTask(plugin.getRepeatingMultiplierEvent().getTaskId());
+				plugin.getRepeatingMultiplierEvent().cancel();
 			}
 			plugin.setRepeatingMultiplierEvent(null);
 		}

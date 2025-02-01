@@ -24,6 +24,7 @@ import dev.rosewood.rosestacker.utils.PersistentDataUtils;
 import me.chocolf.moneyfrommobs.MoneyFromMobs;
 import me.chocolf.moneyfrommobs.utils.RandomNumberUtils;
 import me.chocolf.moneyfrommobs.utils.VersionUtils;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
 
 public class DropsManager {
 	
@@ -148,7 +149,7 @@ public class DropsManager {
 
 			// schedules task to remove drop in certain amount of time if enabled
 			if (autoRemoveDrop) {
-				Bukkit.getScheduler().runTaskLater(plugin, itemDropped::remove, timeUntilRemove * 20L);
+				FoliaUtil.scheduler.runTaskLater(itemDropped, itemDropped::remove, timeUntilRemove * 20L);
 			}
 		}
 	}
@@ -184,7 +185,7 @@ public class DropsManager {
 		}
 		else {
 			numberOfDropsThisMinute.put(playerName, 1);
-			Bukkit.getScheduler().runTaskLater(plugin, () -> numberOfDropsThisMinute.remove(playerName), 1200L);
+			FoliaUtil.scheduler.runTaskLater(() -> numberOfDropsThisMinute.remove(playerName), 1200L);
 			return false;
 		}
 	}

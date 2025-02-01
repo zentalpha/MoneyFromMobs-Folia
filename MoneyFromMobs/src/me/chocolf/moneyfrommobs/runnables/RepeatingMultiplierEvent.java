@@ -4,11 +4,12 @@ import me.chocolf.moneyfrommobs.MoneyFromMobs;
 import me.chocolf.moneyfrommobs.managers.MultipliersManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
+import org.tjdev.util.tjpluginutil.spigot.scheduler.universalscheduler.UniversalRunnable;
+import org.tjdev.util.tjpluginutil.spigot.scheduler.universalscheduler.scheduling.tasks.MyScheduledTask;
 
 
-public class RepeatingMultiplierEvent extends BukkitRunnable{
+public class RepeatingMultiplierEvent extends UniversalRunnable {
 
 	private final MoneyFromMobs plugin;
 
@@ -30,7 +31,7 @@ public class RepeatingMultiplierEvent extends BukkitRunnable{
 			}
 
 			// run task later to set multiplier back to 0 and send message to players
-			BukkitTask task = Bukkit.getScheduler().runTaskLater(plugin, () -> {
+			MyScheduledTask task = FoliaUtil.scheduler.runTaskLater(() -> {
 				multipliersManager.setEventMultiplier(0);
 				multipliersManager.setCurrentMultiplierEvent(null, 0);
 

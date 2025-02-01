@@ -7,11 +7,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import me.chocolf.moneyfrommobs.MoneyFromMobs;
+import org.tjdev.util.tjpluginutil.spigot.scheduler.universalscheduler.UniversalRunnable;
 
-public class NearEntitiesRunnable extends BukkitRunnable{
+public class NearEntitiesRunnable extends UniversalRunnable {
 
 	private final MoneyFromMobs plugin;
 	private final int radius;

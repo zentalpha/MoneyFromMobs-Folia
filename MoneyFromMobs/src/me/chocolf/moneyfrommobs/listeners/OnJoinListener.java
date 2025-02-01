@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import me.chocolf.moneyfrommobs.MoneyFromMobs;
 import me.chocolf.moneyfrommobs.managers.MessageManager;
 import me.chocolf.moneyfrommobs.utils.UpdateChecker;
+import org.tjdev.util.tjpluginutil.spigot.FoliaUtil;
 
 public class OnJoinListener implements Listener{
 
@@ -21,7 +22,7 @@ public class OnJoinListener implements Listener{
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
+		FoliaUtil.scheduler.runTaskLaterAsynchronously(() -> {
 			Player p = e.getPlayer();
 			if (p.isOp() && UpdateChecker.checkForUpdate()) {
 				p.sendMessage("");
