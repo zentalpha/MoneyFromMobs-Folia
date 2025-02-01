@@ -12,39 +12,38 @@
     </properties>
     <build>
         <sourceDirectory>MoneyFromMobs/src</sourceDirectory>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                    <configuration>
-                        <source>17</source>
-                        <target>17</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.5.3</version>
-                    <executions>
-                        <execution>
-                            <configuration>
-                                <relocations>
-                                    <relocation>
-                                        <shadedPattern>org.tjdev.modified.moneyfrommobs.lib</shadedPattern>
-                                        <pattern>org.tjdev.util</pattern>
-                                    </relocation>
-                                </relocations>
-                            </configuration>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                            <phase>package</phase>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <shadedPattern>org.tjdev.modified.moneyfrommobs.lib</shadedPattern>
+                                    <pattern>org.tjdev.util</pattern>
+                                </relocation>
+                            </relocations>
+                            <minimizeJar>true</minimizeJar>
+                        </configuration>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <resources>
             <resource>
                 <directory>MoneyFromMobs/src/resources</directory>
@@ -137,6 +136,7 @@
             <groupId>dev.rosewood</groupId>
             <artifactId>rosestacker</artifactId>
             <version>1.5.7</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.lumine</groupId>
@@ -172,6 +172,7 @@
             <groupId>com.github.chocolf</groupId>
             <artifactId>MoneyFromMobs</artifactId>
             <version>4.82</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.tjdev.util.tjpluginutil</groupId>
